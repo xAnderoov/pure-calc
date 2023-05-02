@@ -1,0 +1,10 @@
+body {
+  font-size: 18px;
+
+  background-color: rgb(230, 73, 46, .1);
+}
+
+footer {
+  align-self: center;
+  padding: 15px;
+}

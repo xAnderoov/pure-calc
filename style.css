@@ -4,6 +4,45 @@ body {
   background-color: rgb(230, 73, 46, .1);
 }
 
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calc {
+  display: grid;
+  grid: auto-flow 75px / repeat(4, 75px);
+  gap: 5px; 
+}
+
+.calc > * {
+  font-size: 20px;
+  color: white;
+  
+  border-radius: 10px;
+  background-color: rgb(255, 102, 0);
+}
+
+.display {
+  grid-column: 1 / 5;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 20px;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+button {
+  transition: background 150ms;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(255, 30, 0);
+}
+
 footer {
   align-self: center;
   padding: 15px;

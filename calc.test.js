@@ -2,13 +2,13 @@ const calc = require('./calc')
 
 let number1 = 3;
 let number2 = 5;
-test('adds two numbers', () =>
+test('add two numbers', () =>
   expect(calc['+'](number1, number2)).toBe(number1 + number2))
-test('subtructs two numbers', () =>
+test('subtract two numbers', () =>
   expect(calc['-'](number1, number2)).toBe(number1 - number2))
-test('multiplyes two numbers', () =>
+test('multiply two numbers', () =>
   expect(calc['*'](number1, number2)).toBe(number1 * number2))
-test('divides two numbers', () =>
+test('divide two numbers', () =>
   expect(calc['/'](number1, number2)).toBe(number1 / number2))
-test('operates two numbers', () =>
+test('operate two numbers', () =>
   expect(calc.operate(number1, ['+'], number2)).toBe(number1 + number2))

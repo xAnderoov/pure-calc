@@ -32,6 +32,12 @@ a:hover {
   color: rgba(0, 0, 0, .7);
 }
 
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
 ul {
   margin: 0;
   padding: 0;

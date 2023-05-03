@@ -10,5 +10,5 @@ test('multiplyes two numbers', () =>
   expect(calc['*'](number1, number2)).toBe(number1 * number2))
 test('divides two numbers', () =>
   expect(calc['/'](number1, number2)).toBe(number1 / number2))
-test('divides two numbers', () =>
+test('operates two numbers', () =>
   expect(calc.operate(number1, ['+'], number2)).toBe(number1 + number2))

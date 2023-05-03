@@ -10,5 +10,3 @@ const calc = {
 }
 
 module.exports = calc;
-
-add calc.js tests, basic

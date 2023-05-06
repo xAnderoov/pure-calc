@@ -9,39 +9,52 @@ const calc = {
   ['-']: (a, b) => a - b,
   ['*']: (a, b) => a * b,
   ['/']: (a, b) => a / b,
-  operate: () => calc[`${calc.operator}`]
-    (Number(calc.operand1()), Number(calc.operand2())),
-  setDisplay: value => {
-    if (display.textContent === '0' && !calc.operator)
-      display.textContent = value
-    else
-      display.textContent += value
-  },
-  clearDisplay: () => display.textContent = ''
+  operate: () => Math.round(calc[`${calc.operator}`]
+    (Number(calc.operand1()), Number(calc.operand2())) * 1000) / 1000
 }
 
 const inputHandler = e => {
   e.preventDefault();
   const inputText = e.target.textContent;
   const operations = ['+', '-', '*', '/'];
-
-  if (inputText.search(/[0-9]/) !== -1)
-    calc.setDisplay(inputText)
-  if (operations.includes(inputText) &&
-    !calc.operand2()) {
-    if (calc.operator) {
-      display.textContent = display.textContent.slice(0, -1).concat(inputText);
-    } else {
-      calc.setDisplay(inputText)
+  const updateDisplay = value => {
+    if (value.toString().search(/[0-9]/) !== -1) {
+      if (display.textContent === '0' && !calc.operator)
+        display.textContent = value
+      else
+        display.textContent += value
     }
-    calc.operator = inputText;
+    if (operations.includes(value)) {
+      if (calc.operator) {
+        display.textContent =
+          display.textContent.slice(0, -1).concat(inputText);
+      } else {
+        display.textContent += value
+      }
+      calc.operator = inputText;
+    }
+    if (value === Infinity || value === -Infinity)
+      display.textContent += value;
   }
-  if (inputText === '=') {
+  const calculate = () => {
     let temp = calc.operate();
-    calc.clearDisplay();
-    calc.setDisplay(temp);
     calc.operator = '';
+    display.textContent = '';
+    updateDisplay(temp);
   }
+
+  if (inputText === 'C') {
+    calc.operator = '';
+    display.textContent = 0;
+  }
+
+  if (inputText === '=' && calc.operand2()) {
+    calculate();
+    return
+  }
+  if (operations.includes(inputText) && calc.operand2())
+    calculate()
+  updateDisplay(inputText);
 }
 const buttons = document.querySelectorAll('.calc > button');
 Array.from(buttons).forEach(button =>

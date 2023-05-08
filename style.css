@@ -36,12 +36,20 @@ main {
 }
 
 button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: background 150ms;
 }
 
 button:not(:disabled):hover {
   cursor: pointer;
   background-color: rgb(255, 30, 0);
+}
+
+button img {
+  width: 60%;
+  height: auto;
 }
 
 footer {

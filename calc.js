@@ -1,58 +1,73 @@
 const display = document.querySelector('.display');
+const operations = ['+', '-', '*', '/'];
 
 const calc = {
-  operator: '',
-  operand1: () => display.textContent.split(`${calc.operator}`)[0],
-  operand2: () => calc.operator ?
-    display.textContent.split(`${calc.operator}`)[1] : null,
+  getOperator: () => operations.reduce((acc, operation) => {
+    const index = display.textContent.slice(1).indexOf(operation);
+    return index !== -1 ? display.textContent[index + 1] : acc
+  }, ''),
+  getOperand1: () => display.textContent.split(`${calc.getOperator()}`)[0],
+  getOperand2: () => calc.getOperator() ?
+    display.textContent.split(`${calc.getOperator()}`)[1] : null,
   ['+']: (a, b) => a + b,
   ['-']: (a, b) => a - b,
   ['*']: (a, b) => a * b,
   ['/']: (a, b) => a / b,
-  operate: () => Math.round(calc[`${calc.operator}`]
-    (Number(calc.operand1()), Number(calc.operand2())) * 1000) / 1000
+  operate: () => Math.round(calc[`${calc.getOperator()}`]
+    (Number(calc.getOperand1()), Number(calc.getOperand2())) * 1000) / 1000
 }
 
 const inputHandler = e => {
   e.preventDefault();
   const inputText = e.target.textContent;
-  const operations = ['+', '-', '*', '/'];
   const updateDisplay = value => {
     if (value.toString().search(/[0-9]/) !== -1) {
-      if (display.textContent === '0' && !calc.operator)
+      if (display.textContent === '0' && !calc.getOperator())
         display.textContent = value
       else
         display.textContent += value
     }
     if (operations.includes(value)) {
-      if (calc.operator) {
+      if (calc.getOperator()) {
         display.textContent =
           display.textContent.slice(0, -1).concat(inputText);
       } else {
         display.textContent += value
       }
-      calc.operator = inputText;
     }
     if (value === Infinity || value === -Infinity)
       display.textContent += value;
   }
   const calculate = () => {
     let temp = calc.operate();
-    calc.operator = '';
     display.textContent = '';
     updateDisplay(temp);
   }
 
   if (inputText === 'C') {
-    calc.operator = '';
     display.textContent = 0;
+    return
   }
 
-  if (inputText === '=' && calc.operand2()) {
+  if (inputText === 'CE') {
+    display.textContent = calc.getOperand2()
+      ? display.textContent.slice
+        (0, display.textContent.indexOf(calc.getOperator()) + 1)
+      : calc.getOperator() ? display.textContent.slice(0, -1) : 0;
+    return
+  }
+
+  if (inputText === 'del') {
+    const updated = display.textContent.slice(0, -1);
+    display.textContent = updated === '' ? 0 : updated;
+    return
+  }
+
+  if (inputText === '=' && calc.getOperand2()) {
     calculate();
     return
   }
-  if (operations.includes(inputText) && calc.operand2())
+  if (operations.includes(inputText) && calc.getOperand2())
     calculate()
   updateDisplay(inputText);
 }

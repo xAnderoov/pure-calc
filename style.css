@@ -47,6 +47,10 @@ button:not(:disabled):hover {
   background-color: rgb(255, 30, 0);
 }
 
+.del {
+  font-size: 0;
+}
+
 button img {
   width: 60%;
   height: auto;

@@ -21,7 +21,6 @@ main {
   color: white;
   
   border-radius: 10px;
-  background-color: rgb(255, 102, 0);
   user-select: none;
 }
 
@@ -33,6 +32,8 @@ main {
   padding: 20px;
   white-space: nowrap;
   overflow-x: hidden;
+
+  background: linear-gradient(rgb(5, 213, 255), rgb(0, 124, 181));
 }
 
 button {
@@ -40,20 +41,18 @@ button {
   justify-content: center;
   align-items: center;
   transition: background 150ms;
+  background-color: rgb(255, 102, 0);
 }
 
 button:not(:disabled):hover {
   cursor: pointer;
-  background-color: rgb(255, 30, 0);
+  background-color: rgb(255, 68, 0);
 }
 
 .del {
   font-size: 0;
-}
-
-button img {
-  width: 60%;
-  height: auto;
+  background: url("img/del-icon.png") no-repeat center center / 60% auto;
+  background-color: rgb(255, 102, 0);
 }
 
 footer {

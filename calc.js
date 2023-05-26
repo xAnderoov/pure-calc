@@ -57,11 +57,18 @@ const inputHandler = e => {
     return
   }
 
+  let isInfinite = Infinity === Math.abs(display.textContent);
   if (inputText === 'del') {
-    const updated = display.textContent.slice(0, -1);
-    display.textContent = updated === '' ? 0 : updated;
+    if (isInfinite) {
+      display.textContent = 0;
+    } else {
+      const updated = display.textContent.slice(0, -1);
+      display.textContent = updated === '' ? 0 : updated;
+    }
     return
   }
+  
+  if (isInfinite) return
 
   if (inputText === '=' && calc.getOperand2()) {
     calculate();

@@ -30,7 +30,7 @@ const inputHandler = e => {
     if (operations.includes(value)) {
       if (calc.getOperator()) {
         display.textContent =
-          display.textContent.slice(0, -1).concat(inputText);
+          display.textContent.slice(0, -1).concat(value);
       } else {
         display.textContent += value
       }

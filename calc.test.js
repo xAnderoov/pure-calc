@@ -1,14 +1,15 @@
 const calc = require('./calc')
 
-let number1 = 3;
-let number2 = 5;
-test('add two numbers', () =>
-  expect(calc['+'](number1, number2)).toBe(number1 + number2))
-test('subtract two numbers', () =>
-  expect(calc['-'](number1, number2)).toBe(number1 - number2))
-test('multiply two numbers', () =>
-  expect(calc['*'](number1, number2)).toBe(number1 * number2))
-test('divide two numbers', () =>
-  expect(calc['/'](number1, number2)).toBe(number1 / number2))
+calc.operand1 = '3'
+calc.operand2 = '9'
+test('add two numbers', () => expect(
+  calc['+'](calc.operand1, calc.operand2)).toBe(calc.operand1 + calc.operand2))
+test('subtract two numbers', () => expect(
+  calc['-'](calc.operand1, calc.operand2)).toBe(calc.operand1 - calc.operand2))
+test('multiply two numbers', () => expect(
+  calc['*'](calc.operand1, calc.operand2)).toBe(calc.operand1 * calc.operand2))
+test('divide two numbers', () => expect(
+  calc['/'](calc.operand1, calc.operand2)).toBe(calc.operand1 / calc.operand2))
+calc.operator = '/'
 test('operate two numbers', () =>
-  expect(calc.operate(number1, ['+'], number2)).toBe(number1 + number2))
+  expect(calc.operate()).toBe(calc.operand1 / calc.operand2))
